@@ -1,0 +1,61 @@
+server:
+  port: ${PORT:8765}
+zuul:
+  prefix: /api
+  routes:
+    client:
+      path: /client/**
+      serviceId: discovery-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      register-with-eureka: false
+      preferSameZoneEureka: true
+  instance:
+    metadata-map:
+      zone: zone1
+spring:
+  profiles: zone1
+
+---
+server:
+  port: ${PORT:8766}
+zuul:
+  prefix: /api
+  routes:
+    client:
+      path: /client/**
+      serviceId: discovery-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka
+      register-with-eureka: false
+      preferSameZoneEureka: true
+  instance:
+    metadata-map:
+      zone: zone2
+spring:
+  profiles: zone2
+#
+#---
+#zuul:
+#  prefix: /api
+#  routes:
+#    client:
+#      path: /client/**
+#      serviceId: discovery-client
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8763/eureka, http://localhost:8761/eureka, http://localhost:8762/eureka
+#      register-with-eureka: false
+#      preferSameZoneEureka: true
+#  instance:
+#    metadata-map:
+#      zone: zone3
+#server:
+#  port: ${PORT:8767}
+#spring:
+#  profiles: zone3

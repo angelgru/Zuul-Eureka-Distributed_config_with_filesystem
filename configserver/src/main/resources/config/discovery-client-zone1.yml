@@ -1,0 +1,14 @@
+server:
+  port: ${PORT:8081}
+eureka:
+  instances:
+    metadataMap:
+      zone: zone1
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/, http://localhost:8762/eureka/, http://localhost:8763/eureka/
+endpoints:
+  shutdown:
+    enabled: true
+
+zone: zone1
